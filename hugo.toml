@@ -1,0 +1,41 @@
+baseURL = "https://carolynabott.github.io/home/"
+languageCode = "en-us"
+title = "Carolyn Abott"
+theme = "academic"
+paginate = 100
+
+[params]
+  name = "Carolyn Abott"
+  title = "Associate Professor of Political Science"
+  institution = "Baruch College, City University of New York"
+  email = "carolyn.abott@baruch.cuny.edu"
+  phone = "+1 (646) 312-4431"
+  office = "Department of Political Science, Baruch College – CUNY, One Bernard Baruch Way, New York, NY 10010"
+  description = "Academic website of Carolyn Abott, Associate Professor of Political Science at Baruch College, CUNY."
+
+[menu]
+  [[menu.main]]
+    name = "HOME"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "ABOUT"
+    url = "/about/"
+    weight = 2
+  [[menu.main]]
+    name = "RESEARCH"
+    url = "/research/"
+    weight = 3
+  [[menu.main]]
+    name = "TEACHING"
+    url = "/teaching/"
+    weight = 4
+  [[menu.main]]
+    name = "CV"
+    url = "/files/cv.pdf"
+    weight = 5
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

@@ -1,0 +1,51 @@
+{{ define "main" }}
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-photo">
+      <img src="{{ "images/photo.png" | relURL }}" alt="Carolyn Abott" width="200" height="200">
+    </div>
+    <div class="hero-text">
+      <h1>Carolyn Abott</h1>
+      <p class="hero-title">Associate Professor of Political Science</p>
+      <p class="hero-inst">Baruch College, City University of New York</p>
+      <p class="hero-intro">Carolyn Abott is a political scientist whose research focuses on American political institutions, state and local governance, public finance, and interest group politics. Her book <em>The Politics of Public Pensions</em> (Columbia University Press, 2025) examines how state-level party politics shapes public sector pension policy. She is currently working on a second book on interest groups and democratic inequality in one-party cities.</p>
+      <div class="hero-links">
+        <a href="{{ "/research/" | relURL }}" class="btn-primary">Research</a>
+        <a href="{{ "/files/cv.pdf" | relURL }}" class="btn-secondary">Download CV</a>
+        <a href="{{ "/about/" | relURL }}" class="btn-secondary">About</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="home-research container">
+  <h2>Research Areas</h2>
+  <div class="research-areas">
+    {{ range .Site.Data.research_areas.areas }}
+    <div class="research-area-card">
+      <h3>{{ .name }}</h3>
+      <p>{{ .description }}</p>
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+<section class="home-recent container">
+  <h2>Recent Work</h2>
+  <ul class="pub-list-home">
+    {{ $published := where .Site.RegularPages "Section" "research" }}
+    {{ $published = where $published ".Params.pub_tab" "in" (slice "article" "book") }}
+    {{ $published = sort $published ".Params.year" "desc" }}
+    {{ range first 5 $published }}
+    {{ $pub := . }}
+    <li class="pub-item-home">
+      <span class="pub-authors">{{ delimit $pub.Params.authors ", " }}</span>
+      {{ with $pub.Params.year }}<span class="pub-year">({{ . }})</span>{{ end }}
+      <a href="{{ $pub.Permalink }}" class="pub-title">{{ $pub.Title }}</a>
+      {{ with $pub.Params.venue }}<span class="pub-venue">{{ . }}</span>{{ end }}
+    </li>
+    {{ end }}
+  </ul>
+  <p><a href="{{ "/research/" | relURL }}" class="view-all">View all research →</a></p>
+</section>
+{{ end }}

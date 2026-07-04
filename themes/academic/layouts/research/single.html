@@ -1,0 +1,30 @@
+{{ define "main" }}
+<div class="page-content container">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="{{ "/" | relURL }}">Home</a> /
+    <a href="{{ "/research/" | relURL }}">Research</a> /
+    <span>{{ .Title }}</span>
+  </nav>
+
+  <article style="max-width:720px; margin-top:1.5rem;">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.authors }}<p class="pub-authors" style="color:var(--color-text-meta);margin-bottom:0.3rem;">{{ delimit . ", " }}</p>{{ end }}
+    {{ with .Params.venue }}<p style="color:var(--color-text-meta);font-style:italic;margin-bottom:0.75rem;">{{ . }}{{ with $.Params.year }}, {{ . }}{{ end }}</p>{{ end }}
+
+    {{ with .Params.links }}
+    <div class="hero-links" style="margin-bottom:1.5rem;">
+      {{ range . }}
+      <a href="{{ .url | relURL }}" class="btn-secondary"{{ if hasPrefix .url "http" }} target="_blank" rel="noopener"{{ end }}>{{ .name }}</a>
+      {{ end }}
+    </div>
+    {{ end }}
+
+    {{ with .Params.abstract }}
+    <h2 id="abstract">Abstract</h2>
+    <p>{{ . }}</p>
+    {{ end }}
+
+    {{ .Content }}
+  </article>
+</div>
+{{ end }}

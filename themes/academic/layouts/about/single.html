@@ -1,0 +1,17 @@
+{{ define "main" }}
+<div class="container about-layout">
+  <aside class="about-sidebar">
+    <img src="{{ "images/photo.png" | relURL }}" alt="Carolyn Abott">
+    <div class="about-contact">
+      <strong>Email</strong>
+      <a href="mailto:carolyn.abott@baruch.cuny.edu">carolyn.abott@baruch.cuny.edu</a>
+      <strong>Phone</strong>+1 (646) 312-4431
+      <strong>Office</strong>Department of Political Science<br>Baruch College – CUNY<br>One Bernard Baruch Way<br>New York, NY 10010
+      <strong>CV</strong><a href="{{ "files/cv.pdf" | relURL }}">Download PDF</a>
+    </div>
+  </aside>
+  <div class="prose">
+    {{ .Content }}
+  </div>
+</div>
+{{ end }}

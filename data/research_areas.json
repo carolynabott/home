@@ -1,0 +1,28 @@
+{
+  "areas": [
+    {
+      "name": "State & Local Politics",
+      "description": "How state governments occupy a distinctive middle ground in the federal system, with consequences for policy and representation."
+    },
+    {
+      "name": "Public Finance",
+      "description": "The politics of taxation, spending, debt, municipal bankruptcy, and fiscal transparency at the state and local level."
+    },
+    {
+      "name": "Interest Groups & Democratic Inequality",
+      "description": "How organized interests, nonprofits, and community organizations shape governance and resource allocation in cities."
+    },
+    {
+      "name": "Elections & Representation",
+      "description": "How electoral rules—including at-large vs. district systems and primary competition—affect minority representation and political outcomes."
+    },
+    {
+      "name": "Education Policy",
+      "description": "The politics and effects of school district spending, property taxes, and parent organizations on student outcomes."
+    },
+    {
+      "name": "Voter Behavior & Information",
+      "description": "How citizens process information about government fiscal performance and respond to it at the ballot box."
+    }
+  ]
+}

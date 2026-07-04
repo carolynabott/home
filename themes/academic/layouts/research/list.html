@@ -1,0 +1,87 @@
+{{ define "main" }}
+<div class="research-page container">
+  <h1>Research</h1>
+  <p class="subtitle">Publications, working papers, and research in progress.</p>
+
+  <div class="pub-tabs-wrap">
+    <ul class="pub-tabs" role="tablist">
+      <li><button class="pub-tab-btn active" data-tab="all" role="tab">All</button></li>
+      <li><button class="pub-tab-btn" data-tab="book" role="tab">Books</button></li>
+      <li><button class="pub-tab-btn" data-tab="article" role="tab">Articles</button></li>
+      <li><button class="pub-tab-btn" data-tab="working" role="tab">Working Papers</button></li>
+      <li><button class="pub-tab-btn" data-tab="progress" role="tab">In Progress</button></li>
+      <li><button class="pub-tab-btn" data-tab="other" role="tab">Other</button></li>
+    </ul>
+  </div>
+
+  <div class="research-layout">
+    <aside class="pub-sidebar">
+      <h3>Search</h3>
+      <input type="text" id="pub-search" placeholder="Title, author, venue…" aria-label="Search publications">
+
+      <h3>Sort</h3>
+      <div class="pub-sort-wrap">
+        <select id="pub-sort" aria-label="Sort order">
+          <option value="newest">Newest first</option>
+          <option value="oldest">Oldest first</option>
+          <option value="title-az">Title A–Z</option>
+          <option value="title-za">Title Z–A</option>
+        </select>
+      </div>
+
+      <h3>Year</h3>
+      <div class="filter-group year-filter-list" id="year-filter-list">
+        {{ $years := slice }}
+        {{ range .Pages }}
+          {{ with .Params.year }}
+            {{ $years = $years | append (string .) }}
+          {{ end }}
+        {{ end }}
+        {{ $years = $years | uniq | sort }}
+        {{ range (sort $years "value" "desc") }}
+        <label><input type="checkbox" value="{{ . }}"> {{ . }}</label>
+        {{ end }}
+      </div>
+
+      <button class="btn-reset" id="btn-reset">Reset filters</button>
+      <button class="btn-bibtex" id="btn-bibtex" style="margin-top:0.5rem;width:100%">Export BibTeX</button>
+    </aside>
+
+    <div class="pub-main">
+      <div class="pub-list-controls">
+        <span class="pub-count"></span>
+      </div>
+      <ul class="pub-list">
+        {{ range .Pages }}
+        {{ $p := . }}
+        {{ $tab := .Params.pub_tab | default "other" }}
+        {{ $bibtex := .Params.bibtex | default "" }}
+        <li class="pub-list-item"
+            data-tab="{{ $tab }}"
+            data-year="{{ .Params.year }}"
+            data-sort-title="{{ lower .Title }}"
+            data-text="{{ lower .Title }} {{ lower (delimit .Params.authors " ") }} {{ lower (.Params.venue | default "") }}"
+            data-bibtex="{{ $bibtex | urlquery }}">
+          <div>
+            <span class="pub-authors">{{ delimit .Params.authors ", " }}</span>
+            {{ with .Params.year }}<span class="pub-year">({{ . }})</span>{{ end }}
+            <a href="{{ .Permalink }}" class="pub-title-link">{{ .Title }}</a>
+            {{ with .Params.status }}<span class="pub-status-chip">{{ . }}</span>{{ end }}
+          </div>
+          <div class="pub-meta">
+            {{ with .Params.venue }}{{ . }}{{ end }}
+          </div>
+          {{ with .Params.links }}
+          <div class="pub-links">
+            {{ range . }}
+            <a href="{{ .url | relURL }}" class="pub-link-chip"{{ if hasPrefix .url "http" }} target="_blank" rel="noopener"{{ end }}>{{ .name }}</a>
+            {{ end }}
+          </div>
+          {{ end }}
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+</div>
+{{ end }}

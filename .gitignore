@@ -1,0 +1,8 @@
+public/
+resources/
+.hugo_build.lock
+.DS_Store
+*.pdf
+!static/files/cv.pdf
+carolynabott/
+.claude/
