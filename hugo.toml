@@ -3,6 +3,11 @@ languageCode = "en-us"
 title = "Carolyn Abott"
 theme = "academic"
 paginate = 100
+enableRobotsTXT = true
+
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5
 
 [params]
   name = "Carolyn Abott"
